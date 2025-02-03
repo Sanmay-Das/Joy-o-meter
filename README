@@ -1,0 +1,1 @@
+Implementation of a simple linear neural network that reads in text and uses pretrained embeddings to predict the happiness intensity of the text.
