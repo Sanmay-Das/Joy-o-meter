@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Joy-O-Meter (BERT Prediction)</title>
+    <script>
+        function predictHappiness() {
+            let text = document.getElementById("inputText").value;
+            console.log("User Input:", text); // ✅ Debugging step 1: Log user input
+
+            let apiUrl = "https://ad6f-34-16-223-19.ngrok-free.app/predict/"; // Replace with actual ngrok URL
+
+            fetch(apiUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text: text })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("API Response:", data); // ✅ Debugging step 2: Log API response
+                document.getElementById("result").innerText = "Happiness Score: " + data.happiness_score;
+            })
+            .catch(error => {
+                console.error("Fetch Error:", error); // ✅ Debugging step 3: Log fetch errors
+                document.getElementById("result").innerText = "Error: Could not fetch prediction.";
+            });
+        }
+    </script>
+</head>
+<body>
+    <h2>Enter a sentence to measure happiness:</h2>
+    <input type="text" id="inputText" placeholder="Type here...">
+    <button onclick="predictHappiness()">Predict</button>
+    <p id="result"></p>
+</body>
+</html>
